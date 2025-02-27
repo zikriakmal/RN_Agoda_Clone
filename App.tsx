@@ -5,127 +5,143 @@
  * @format
  */
 
-import React from 'react';
-import type {PropsWithChildren} from 'react';
-import {
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  useColorScheme,
-  View,
-} from 'react-native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { NavigationContainer, useLinkBuilder, useTheme } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import React, { useEffect, useState } from 'react';
+import { Image, Text, TouchableOpacity, View } from 'react-native';
+import HomeScreen from './src/screens/HomeScreen';
+import SplashScreen from './src/screens/SplashScreen';
+import UnderconstructionScreen from './src/screens/UnderconstructionScreen';
+import HotelsScreen from './src/screens/HotelsScreen';
 
-import {
-  Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
+const Tab = createBottomTabNavigator();
+const Stack = createNativeStackNavigator();
 
-type SectionProps = PropsWithChildren<{
-  title: string;
-}>;
+function MyTabBar({ state, descriptors, navigation }: { state: any, descriptors: any, navigation: any }) {
+  const { colors } = useTheme();
+  const { buildHref } = useLinkBuilder();
 
-function Section({children, title}: SectionProps): React.JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
   return (
-    <View style={styles.sectionContainer}>
-      <Text
-        style={[
-          styles.sectionTitle,
-          {
-            color: isDarkMode ? Colors.white : Colors.black,
-          },
-        ]}>
-        {title}
-      </Text>
-      <Text
-        style={[
-          styles.sectionDescription,
-          {
-            color: isDarkMode ? Colors.light : Colors.dark,
-          },
-        ]}>
-        {children}
-      </Text>
+    <View style={{ flexDirection: 'row', justifyContent: 'space-between', paddingHorizontal: 10, paddingBottom: 30, backgroundColor: 'white', borderWidth: 0.5, borderColor: 'lightgrey', paddingTop: 15 }}>
+      {state.routes.map((route: any, index: any) => {
+        const { options } = descriptors[route.key];
+        const label =
+          options.tabBarLabel !== undefined
+            ? options.tabBarLabel
+            : options.title !== undefined
+              ? options.title
+              : route.name;
+
+        const isFocused = state.index === index;
+
+        const onPress = () => {
+          const event = navigation.emit({
+            type: 'tabPress',
+            target: route.key,
+            canPreventDefault: true,
+          });
+
+          if (!isFocused && !event.defaultPrevented) {
+            navigation.navigate(route.name, route.params);
+          }
+        };
+
+        const onLongPress = () => {
+          navigation.emit({
+            type: 'tabLongPress',
+            target: route.key,
+          });
+        };
+
+        let icon = <Image source={isFocused ? require('./src/assets/bottom_nav/home_active.png') : require('./src/assets/bottom_nav/home.png')} style={{ height: 24, width: 24 }} />
+        switch (route.name) {
+          case 'Home': {
+            icon = <Image source={isFocused ? require('./src/assets/bottom_nav/home_active.png') : require('./src/assets/bottom_nav/home.png')} style={{ height: 24, width: 24 }} />
+            break;
+          }
+          case 'MyTrips': {
+            icon = <Image source={isFocused ? require('./src/assets/bottom_nav/my_trips_active.png') : require('./src/assets/bottom_nav/my_trips.png')} style={{ height: 24, width: 24 }} />
+            break;
+          }
+          case 'Deals': {
+            icon = <Image source={isFocused ? require('./src/assets/bottom_nav/deals_active.png') : require('./src/assets/bottom_nav/deals.png')} style={{ height: 24, width: 28 }} />
+            break;
+          }
+          case 'Cart': {
+            icon = <Image source={isFocused ? require('./src/assets/bottom_nav/cart_active.png') : require('./src/assets/bottom_nav/cart.png')} style={{ height: 24, width: 25 }} />
+            break;
+          }
+          case 'More': {
+            icon = <Image source={isFocused ? require('./src/assets/bottom_nav/more_active.png') : require('./src/assets/bottom_nav/more.png')} style={{ height: 24, width: 18 }} />
+
+            break;
+          }
+          default: {
+            icon = <Image source={isFocused ? require('./src/assets/bottom_nav/home_active.png') : require('./src/assets/bottom_nav/home.png')} style={{ height: 24, width: 24 }} />
+            break;
+          }
+        }
+
+        return (
+          <TouchableOpacity
+            key={index}
+            accessibilityState={isFocused ? { selected: true } : {}}
+            accessibilityLabel={options.tabBarAccessibilityLabel}
+            testID={options.tabBarButtonTestID}
+            onPress={onPress}
+            onLongPress={onLongPress}
+            style={{ flex: 1, alignItems: 'center', gap: 6 }}
+          >
+            {icon}
+            <Text style={{ color: isFocused ? colors.primary : 'grey', fontWeight: '600', fontSize: 12 }}>
+              {label}
+            </Text>
+          </TouchableOpacity>
+        );
+      })}
     </View>
+  );
+}
+
+function MyTabs() {
+  return (
+    <Tab.Navigator screenOptions={{ headerShown: false,  }} tabBar={(props) => <MyTabBar {...props} />} >
+      <Tab.Screen name="Home" options={{ title: 'Home' }} component={HomeScreen} />
+      <Tab.Screen name="MyTrips" options={{ title: 'My Trips' }} component={UnderconstructionScreen} />
+      <Tab.Screen name="Deals" options={{ title: 'Deals' }} component={UnderconstructionScreen} />
+      <Tab.Screen name="Cart" options={{ title: 'Cart' }} component={UnderconstructionScreen} />
+      <Tab.Screen name="More" options={{ title: 'More' }} component={UnderconstructionScreen} />
+    </Tab.Navigator>
   );
 }
 
 function App(): React.JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
-
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-  };
-
-  /*
-   * To keep the template simple and small we're adding padding to prevent view
-   * from rendering under the System UI.
-   * For bigger apps the reccomendation is to use `react-native-safe-area-context`:
-   * https://github.com/AppAndFlow/react-native-safe-area-context
-   *
-   * You can read more about it here:
-   * https://github.com/react-native-community/discussions-and-proposals/discussions/827
-   */
-  const safePadding = '5%';
-
+  const [isLoaded, setIsLoaded] = useState<boolean>(false);
+  useEffect(() => {
+    setTimeout(() => {
+      setIsLoaded(true)
+    }, 1000)
+  }, [])
   return (
-    <View style={backgroundStyle}>
-      <StatusBar
-        barStyle={isDarkMode ? 'light-content' : 'dark-content'}
-        backgroundColor={backgroundStyle.backgroundColor}
-      />
-      <ScrollView
-        style={backgroundStyle}>
-        <View style={{paddingRight: safePadding}}>
-          <Header/>
-        </View>
-        <View
-          style={{
-            backgroundColor: isDarkMode ? Colors.black : Colors.white,
-            paddingHorizontal: safePadding,
-            paddingBottom: safePadding,
-          }}>
-          <Section title="Step One">
-            Edit <Text style={styles.highlight}>App.tsx</Text> to change this
-            screen and then come back to see your edits.
-          </Section>
-          <Section title="See Your Changes">
-            <ReloadInstructions />
-          </Section>
-          <Section title="Debug">
-            <DebugInstructions />
-          </Section>
-          <Section title="Learn More">
-            Read the docs to discover what to do next:
-          </Section>
-          <LearnMoreLinks />
-        </View>
-      </ScrollView>
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator>
+        {!isLoaded ?
+          <Stack.Screen name="SplashScreen" options={{ headerShown: false }} component={SplashScreen} /> :
+          <>
+            <Stack.Screen name="Dashboard" options={{ headerShown: false }} component={MyTabs} />
+            <Stack.Screen name="HotelsScreen" options={{ headerShown: false }} component={HotelsScreen} />
+            <Stack.Screen name="UnderconstructionScreen" options={{
+              headerShown: false, title: 'UnderconstructionScreen', animationTypeForReplace: 'push',
+              animation: 'slide_from_bottom'
+            }} component={UnderconstructionScreen} />
+          </>
+        }
+      </Stack.Navigator>
+    </NavigationContainer>
+
   );
 }
 
-const styles = StyleSheet.create({
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-  },
-  highlight: {
-    fontWeight: '700',
-  },
-});
 
 export default App;
