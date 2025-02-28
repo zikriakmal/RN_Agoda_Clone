@@ -1,9 +1,9 @@
 import { useNavigation } from "@react-navigation/native";
 import { useCallback, useState } from "react";
-import { Alert, Image, RefreshControl, SafeAreaView, ScrollView, StatusBar, Text, TouchableOpacity, View } from "react-native";
-import NavigationProp from "../../types/RouteTypes";
+import { Alert, Image, RefreshControl, SafeAreaView, ScrollView, StatusBar, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import Gap from "../../components/Gap";
 import Line from "../../components/Line";
+import NavigationProp from "../../types/RouteTypes";
 
 const HomeScreen = () => {
     const [refreshing, setRefreshing] = useState(false);
@@ -44,10 +44,6 @@ const HomeScreen = () => {
     )
 }
 
-
-
-
-
 const Header = () => {
     return (
         <View style={{ marginHorizontal: 12, marginTop: 5, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
@@ -71,7 +67,7 @@ const MainMenu = () => {
     const navigation = useNavigation<NavigationProp>();
     return (<View style={{ marginHorizontal: 12, flexDirection: 'column', gap: 15 }} >
         <View style={{ flexDirection: 'row', gap: 10 }}>
-            <TouchableOpacity onPress={() => navigation.navigate('HotelsScreen')} style={{ flex: 1, backgroundColor: "#FFDFDF", borderRadius: 25, height: 100, overflow: 'hidden' }} >
+            <TouchableOpacity onPress={() => navigation.navigate('HotelsScreen')} style={[styles.mainMenuChildContainer]} >
                 <Text style={{ marginBottom: 10, padding: 15, paddingVertical: 10, fontWeight: '600', fontSize: 16 }}>Hotels</Text>
                 <Image style={{ height: 55, width: 95, position: 'absolute', bottom: 0, right: 0 }} source={require('../../assets/icons/hotels.png')} />
             </TouchableOpacity>
@@ -376,9 +372,16 @@ const MorePlaces = () => {
     )
 }
 
-const styles = {
+const styles = StyleSheet.create({
+    mainMenuChildContainer: {
+        flex: 1,
+        backgroundColor: "#FFDFDF",
+        borderRadius: 25,
+        height: 100,
+        overflow: 'hidden'
+    },
     mainContainer: { backgroundColor: 'white' },
-    leftImage: { height: 25, width: 49 },
+    leftImage: { height: 25, width: 50.5 },
     memberIcon: { height: 19, width: 100 },
     discountContainer: {
         backgroundColor: '#E2F2E5',
@@ -392,6 +395,6 @@ const styles = {
         marginBottom: 8,
         gap: 10,
     },
-}
+})
 
 export default HomeScreen;
