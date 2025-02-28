@@ -1,13 +1,15 @@
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 
-// Define the type for your navigation stack
 type RootStackParamList = {
-    HotelsScreen: undefined; // Add other screens if needed
     SplashScreen: undefined;
     UnderconstructionScreen: { hasBackButton?: boolean };
+    HotelsScreen: undefined;
+    FlightsScreen: { hasBackButton?: boolean };
+    FlightsAndHotelScreen: { hasBackButton?: boolean };
+    ActivitiesScreen: { hasBackButton?: boolean };
+    HomesAndAptsScreen: { hasBackButton?: boolean };
 };
 
-// Specify the navigation prop type
 type NavigationProp = NativeStackNavigationProp<RootStackParamList, 'HotelsScreen'>;
 
 export default NavigationProp;

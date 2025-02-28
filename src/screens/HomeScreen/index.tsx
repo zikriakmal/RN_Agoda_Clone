@@ -75,21 +75,21 @@ const MainMenu = () => {
                 <Text style={{ marginBottom: 10, padding: 15, paddingVertical: 10, fontWeight: '600', fontSize: 16 }}>Hotels</Text>
                 <Image style={{ height: 55, width: 95, position: 'absolute', bottom: 0, right: 0 }} source={require('../../assets/icons/hotels.png')} />
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => navigation.navigate('UnderconstructionScreen', { hasBackButton: true })} style={{ flex: 1, backgroundColor: "#F1DFFF", borderRadius: 25, height: 100, overflow: 'hidden' }} >
+            <TouchableOpacity onPress={() => navigation.navigate('FlightsScreen', { hasBackButton: true })} style={{ flex: 1, backgroundColor: "#F1DFFF", borderRadius: 25, height: 100, overflow: 'hidden' }} >
                 <Text style={{ marginBottom: 10, padding: 15, paddingVertical: 10, fontWeight: '600', fontSize: 16 }}>Flights</Text>
                 <Image style={{ height: 55, width: 95, position: 'absolute', bottom: 0, right: 0 }} source={require('../../assets/icons/flights.png')} />
             </TouchableOpacity>
         </View>
         <View style={{ flexDirection: 'row', gap: 10 }}>
-            <TouchableOpacity style={{ flex: 1, backgroundColor: "#DFF7FF", borderRadius: 25, height: 100, overflow: 'hidden' }} >
+            <TouchableOpacity onPress={() => navigation.navigate('FlightsAndHotelScreen', { hasBackButton: true })} style={{ flex: 1, backgroundColor: "#DFF7FF", borderRadius: 25, height: 100, overflow: 'hidden' }} >
                 <Text style={{ marginBottom: 10, padding: 15, paddingVertical: 10, fontWeight: '600', fontSize: 16 }}>{'Flights\n+Hotel'}</Text>
                 <Image style={{ height: 55, width: 99, position: 'absolute', bottom: 0, right: 0 }} source={require('../../assets/icons/flights_hotels.png')} />
             </TouchableOpacity>
-            <TouchableOpacity style={{ flex: 1, backgroundColor: "#FBF3D5", borderRadius: 25, height: 100, overflow: 'hidden' }} >
+            <TouchableOpacity onPress={() => navigation.navigate('ActivitiesScreen', { hasBackButton: true })} style={{ flex: 1, backgroundColor: "#FBF3D5", borderRadius: 25, height: 100, overflow: 'hidden' }} >
                 <Text style={{ marginBottom: 10, padding: 15, paddingVertical: 10, fontWeight: '600', fontSize: 16 }}>{'Activities'}</Text>
                 <Image style={{ height: 55, width: 95, position: 'absolute', bottom: 0, right: 0 }} source={require('../../assets/icons/activities.png')} />
             </TouchableOpacity>
-            <TouchableOpacity style={{ flex: 1, backgroundColor: "#EDFBD0", borderRadius: 25, height: 100, overflow: 'hidden' }} >
+            <TouchableOpacity onPress={() => navigation.navigate('HomesAndAptsScreen', { hasBackButton: true })} style={{ flex: 1, backgroundColor: "#EDFBD0", borderRadius: 25, height: 100, overflow: 'hidden' }} >
                 <Text style={{ marginBottom: 10, padding: 15, paddingVertical: 10, fontWeight: '600', fontSize: 16 }}>{'Homes\n& Apts'}</Text>
                 <Image style={{ height: 55, width: 95, position: 'absolute', bottom: 0, right: 0 }} source={require('../../assets/icons/hones_apts.png')} />
             </TouchableOpacity>

@@ -1,26 +1,22 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- */
-
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { NavigationContainer, useLinkBuilder, useTheme } from '@react-navigation/native';
+import { NavigationContainer, useTheme } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import React, { useEffect, useState } from 'react';
 import { Image, Text, TouchableOpacity, View } from 'react-native';
+import ActivitiesScreen from './src/screens/ActivitiesScreen';
+import FlightsAndHotelScreen from './src/screens/FlightsAndHotelScreen';
+import FlightsScreen from './src/screens/FlightsScreen';
+import HomesAndAptsScreen from './src/screens/HomesAndAptsScreen';
 import HomeScreen from './src/screens/HomeScreen';
+import HotelsScreen from './src/screens/HotelsScreen';
 import SplashScreen from './src/screens/SplashScreen';
 import UnderconstructionScreen from './src/screens/UnderconstructionScreen';
-import HotelsScreen from './src/screens/HotelsScreen';
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
 
 function MyTabBar({ state, descriptors, navigation }: { state: any, descriptors: any, navigation: any }) {
   const { colors } = useTheme();
-  const { buildHref } = useLinkBuilder();
 
   return (
     <View style={{ flexDirection: 'row', justifyContent: 'space-between', paddingHorizontal: 10, paddingBottom: 30, backgroundColor: 'white', borderWidth: 0.5, borderColor: 'lightgrey', paddingTop: 15 }}>
@@ -106,7 +102,7 @@ function MyTabBar({ state, descriptors, navigation }: { state: any, descriptors:
 
 function MyTabs() {
   return (
-    <Tab.Navigator screenOptions={{ headerShown: false,  }} tabBar={(props) => <MyTabBar {...props} />} >
+    <Tab.Navigator screenOptions={{ headerShown: false, }} tabBar={(props) => <MyTabBar {...props} />} >
       <Tab.Screen name="Home" options={{ title: 'Home' }} component={HomeScreen} />
       <Tab.Screen name="MyTrips" options={{ title: 'My Trips' }} component={UnderconstructionScreen} />
       <Tab.Screen name="Deals" options={{ title: 'Deals' }} component={UnderconstructionScreen} />
@@ -127,19 +123,49 @@ function App(): React.JSX.Element {
     <NavigationContainer>
       <Stack.Navigator>
         {!isLoaded ?
-          <Stack.Screen name="SplashScreen" options={{ headerShown: false }} component={SplashScreen} /> :
+          <Stack.Screen
+            name="SplashScreen"
+            options={{ headerShown: false }}
+            component={SplashScreen} /> :
           <>
-            <Stack.Screen name="Dashboard" options={{ headerShown: false }} component={MyTabs} />
-            <Stack.Screen name="HotelsScreen" options={{ headerShown: false }} component={HotelsScreen} />
-            <Stack.Screen name="UnderconstructionScreen" options={{
-              headerShown: false, title: 'UnderconstructionScreen', animationTypeForReplace: 'push',
-              animation: 'slide_from_bottom'
-            }} component={UnderconstructionScreen} />
+            <Stack.Screen name="Dashboard"
+              options={{ headerShown: false }}
+              component={MyTabs} />
+            <Stack.Screen
+              name="UnderconstructionScreen"
+              options={{
+                headerShown: false,
+                title: 'UnderconstructionScreen',
+                animationTypeForReplace: 'push',
+                animation: 'slide_from_bottom'
+              }}
+              component={UnderconstructionScreen} />
+            <Stack.Screen
+              name="HotelsScreen"
+              options={{ headerShown: false }}
+              component={HotelsScreen} />
+            <Stack.Screen
+              name="FlightsScreen"
+              options={{ headerShown: false }}
+              component={FlightsScreen}
+            />
+            <Stack.Screen
+              name="FlightsAndHotelScreen"
+              options={{ headerShown: false }}
+              component={FlightsAndHotelScreen}
+            />
+            <Stack.Screen
+              name="ActivitiesScreen"
+              options={{ headerShown: false }}
+              component={ActivitiesScreen} />
+            <Stack.Screen
+              name="HomesAndAptsScreen"
+              options={{ headerShown: false }}
+              component={HomesAndAptsScreen} />
           </>
         }
       </Stack.Navigator>
     </NavigationContainer>
-
   );
 }
 
