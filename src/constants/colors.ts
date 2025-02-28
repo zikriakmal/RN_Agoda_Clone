@@ -1,3 +1,3 @@
 const colors = {
-    mainBlue:""
+    primary: ""
 }

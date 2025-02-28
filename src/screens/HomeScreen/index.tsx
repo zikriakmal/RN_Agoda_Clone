@@ -1,12 +1,13 @@
 import { useNavigation } from "@react-navigation/native";
-import { useCallback, useState } from "react";
-import { Alert, Image, RefreshControl, SafeAreaView, ScrollView, StatusBar, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { useCallback, useEffect, useState } from "react";
+import { Alert, Dimensions, Image, Modal, RefreshControl, SafeAreaView, ScrollView, StatusBar, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import Gap from "../../components/Gap";
 import Line from "../../components/Line";
 import NavigationProp from "../../types/RouteTypes";
 
 const HomeScreen = () => {
     const [refreshing, setRefreshing] = useState(false);
+    const [isPromotionModalOpen, setIsPromotionModalOpen] = useState(true);
 
     const onRefresh = useCallback(() => {
         setRefreshing(true);
@@ -40,6 +41,41 @@ const HomeScreen = () => {
                 <Line />
                 <MorePlaces />
             </ScrollView >
+            <Modal
+                animationType="fade"
+                transparent={true}
+                visible={isPromotionModalOpen}
+                onRequestClose={() => {
+                    Alert.alert('Modal has been closed.');
+                    setIsPromotionModalOpen(!isPromotionModalOpen);
+                }}>
+                <View style={{
+                    backgroundColor: 'rgba(0,0,0,0.2)',
+                    height: '100%',
+                    width: '100%',
+                    flexDirection: 'column',
+                    justifyContent: 'center',
+                    alignItems: 'center'
+                }}>
+                    <View>
+                        <View style={{ backgroundColor: '#009A00', borderRadius: 40, marginTop: 40, width: Dimensions.get('screen').width - 40 }} >
+                            <View style={{ alignItems: 'center', marginTop: -60, gap: 20, marginBottom: 20 }}>
+                                <Image source={require('../../assets/icons/mid_month_sale.png')} style={{ height: 90, width: 200 }} />
+                                <Image source={require('../../assets/icons/special_event.png')} style={{ height: 30, width: 200 }} />
+                                <Text style={{ fontSize: 24, color: 'white', fontWeight: '800', textAlign: 'center' }}> {'Zikri, Get up to 99% OFF\n selected Hotels\n worldwide!'}</Text>
+                                <Text style={{ fontSize: 16, color: 'white', fontWeight: '300', textAlign: 'center' }}> {'Activate Special prices on selected hotels\nfor up to 24 hours'}</Text>
+                            </View>
+                            <TouchableOpacity style={{ height: 50, marginBottom: 30, marginHorizontal: 20, backgroundColor: 'white', borderRadius: 40, alignItems: 'center', justifyContent: 'center' }}>
+                                <Text style={{ fontWeight: '800' }}>ACTIVATE NOW</Text>
+                            </TouchableOpacity>
+
+                        </View>
+                        <TouchableOpacity activeOpacity={1} style={{ alignItems: 'center', justifyContent: 'center', position: 'absolute', right: 0, top: 0, backgroundColor: 'rgba(199, 196, 202, 0.9)', borderRadius: 20, height: 40, width: 40 }} onPress={() => { setIsPromotionModalOpen(false) }}>
+                            <Image source={require('../../assets/icons/x.png')} style={{ height: 14, width: 14 }} />
+                        </TouchableOpacity>
+                    </View>
+                </View>
+            </Modal>
         </SafeAreaView >
     )
 }
@@ -176,7 +212,7 @@ const NewUserWelcomePack = () => {
     return (
         <View style={styles.sectionContainer}>
             <Text style={{ paddingHorizontal: 12, fontWeight: '700' }}>New user welcome pack!</Text>
-            <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} contentContainerStyle={{ paddingLeft: 12, gap: 10, marginTop: 0 }}>
+            <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} contentContainerStyle={{ paddingHorizontal: 12, gap: 10, marginTop: 0 }}>
                 <TouchableOpacity onPress={() => Alert.alert('Underconstruction!')} >
                     <View style={{ paddingVertical: 2, width: 40, height: 8, zIndex: 999, borderRadius: 2, alignItems: 'center' }} />
                     <View style={{ flexDirection: 'row', marginTop: 0, gap: 18, alignItems: 'center', borderWidth: 0.5, borderColor: 'lightgrey', paddingVertical: 15, paddingHorizontal: 15, borderRadius: 15 }}>
