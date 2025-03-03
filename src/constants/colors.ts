@@ -1,3 +1,5 @@
 const colors = {
-    primary: ""
+    primary: "",
+    secondary: "",
+    tertiary: "",
 }

@@ -1,15 +1,8 @@
 import { View } from "react-native";
+import styles from "./styles";
 
 const Line = () => {
-    return (
-        <View style={{
-            marginVertical: 10,
-            height: 1,
-            width: '100%',
-            backgroundColor: 'lightgrey'
-        }} />
-    )
+    return (<View style={styles.lineContainer} />)
 }
-
 
 export default Line;
