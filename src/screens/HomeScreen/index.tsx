@@ -1,9 +1,10 @@
 import { useNavigation } from "@react-navigation/native";
-import { useCallback, useEffect, useState } from "react";
-import { Alert, Dimensions, Image, Modal, RefreshControl, SafeAreaView, ScrollView, StatusBar, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { useCallback, useState } from "react";
+import { Alert, Dimensions, Image, Modal, RefreshControl, SafeAreaView, ScrollView, StatusBar, Text, TouchableOpacity, View } from "react-native";
 import Gap from "../../components/Gap";
 import Line from "../../components/Line";
 import NavigationProp from "../../types/RouteTypes";
+import styles from "./styles";
 
 const HomeScreen = () => {
     const [refreshing, setRefreshing] = useState(false);
@@ -408,29 +409,5 @@ const MorePlaces = () => {
     )
 }
 
-const styles = StyleSheet.create({
-    mainMenuChildContainer: {
-        flex: 1,
-        backgroundColor: "#FFDFDF",
-        borderRadius: 25,
-        height: 100,
-        overflow: 'hidden'
-    },
-    mainContainer: { backgroundColor: 'white' },
-    leftImage: { height: 25, width: 50.5 },
-    memberIcon: { height: 19, width: 100 },
-    discountContainer: {
-        backgroundColor: '#E2F2E5',
-        padding: 5,
-        paddingHorizontal: 10,
-        borderRadius: 5,
-        gap: 10
-    },
-    sectionContainer: {
-        marginTop: 10,
-        marginBottom: 8,
-        gap: 10,
-    },
-})
 
 export default HomeScreen;
