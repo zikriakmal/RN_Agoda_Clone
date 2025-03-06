@@ -6,7 +6,7 @@ const UnderconstructionScreen = ({ route }: { route: any }) => {
     const navigation = useNavigation();
     return (
         <View style={styles.container}>
-            <Image source={require('../../assets/blank_bg.png')} style={{ height: '100%', width: '100%', position: 'absolute' }} />
+            <Image source={require('../../assets/images/blank_bg.png')} style={{ height: '100%', width: '100%', position: 'absolute' }} />
             <Text style={styles.text}>{'Underconstruction'}</Text>
             {
                 route?.params?.hasBackButton ?
