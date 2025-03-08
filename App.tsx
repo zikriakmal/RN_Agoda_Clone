@@ -1,4 +1,6 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+
+
 import { NavigationContainer, useTheme } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import React, { useEffect, useState } from 'react';
@@ -15,7 +17,7 @@ import UnderconstructionScreen from './src/screens/UnderconstructionScreen';
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
 
-function MyTabBar({ state, descriptors, navigation }: { state: any, descriptors: any, navigation: any }) {
+const MyTabBar = ({ state, descriptors, navigation }: { state: any, descriptors: any, navigation: any }) => {
   const { colors } = useTheme();
 
   return (
@@ -99,8 +101,7 @@ function MyTabBar({ state, descriptors, navigation }: { state: any, descriptors:
     </View>
   );
 }
-
-function MyTabs() {
+const MyTabs = () => {
   return (
     <Tab.Navigator screenOptions={{ headerShown: false, }} tabBar={(props) => <MyTabBar {...props} />} >
       <Tab.Screen name="Home" options={{ title: 'Home' }} component={HomeScreen} />
@@ -111,7 +112,6 @@ function MyTabs() {
     </Tab.Navigator>
   );
 }
-
 function App(): React.JSX.Element {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   useEffect(() => {
@@ -168,6 +168,5 @@ function App(): React.JSX.Element {
     </NavigationContainer>
   );
 }
-
 
 export default App;
