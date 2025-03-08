@@ -17,6 +17,11 @@ const styles = StyleSheet.create({
         borderBottomWidth: 0.5,
         marginTop: 10,
         fontWeight: '800'
+    },
+    image: {
+        height: '100%',
+        width: '100%',
+        position: 'absolute'
     }
 });
 

@@ -13,4 +13,4 @@ type RootStackParamList = {
 
 type NavigationProp = NativeStackNavigationProp<RootStackParamList, 'HotelsScreen'>;
 
-export default NavigationProp;
+export type { NavigationProp, RootStackParamList }
