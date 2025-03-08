@@ -11,7 +11,7 @@ const UnderconstructionScreen = (): React.JSX.Element => {
             <Image source={require('../../assets/images/blank_bg.png')} style={{ height: '100%', width: '100%', position: 'absolute' }} />
             <Text style={styles.text}>{'Underconstruction'}</Text>
             {
-                route.params.hasBackButton ?
+                route?.params?.hasBackButton ?
                     <TouchableOpacity onPress={() => navigation.goBack()}>
                         <Text style={styles.buttonText}>{'Back'}</Text>
                     </TouchableOpacity> : null

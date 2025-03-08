@@ -1,7 +1,7 @@
 import { useNavigation } from "@react-navigation/native";
 import { ColorValue, Image, ImageSourcePropType, Text, TouchableOpacity, View } from "react-native";
 import colors from "../../../../constants/colors";
-import NavigationProp from "../../../../types/RouteTypes";
+import { NavigationProp } from "../../../../types/RouteTypes";
 import styles from "./styles";
 
 const MainMenu = () => {

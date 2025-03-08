@@ -5,7 +5,7 @@ const MorePlaces = () => {
     return (
         <View style={styles.sectionContainer}>
             <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                <Text style={{ paddingHorizontal: 12, fontWeight: '700' }}>Explore more places in Kuala Lumpur</Text>
+                <Text style={{ paddingHorizontal: 12, fontWeight: '700' }}>{'Explore more places in Kuala Lumpur'}</Text>
             </View>
             <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} contentContainerStyle={{ paddingHorizontal: 12, gap: 10 }}>
                 <TouchableOpacity onPress={() => Alert.alert('Underconstruction!')} >
