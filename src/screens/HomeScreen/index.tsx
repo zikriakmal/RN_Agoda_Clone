@@ -1,9 +1,7 @@
-import { useNavigation } from "@react-navigation/native";
 import { useCallback, useState } from "react";
-import { Alert, Dimensions, Image, Modal, RefreshControl, SafeAreaView, ScrollView, StatusBar, Text, TouchableOpacity, View } from "react-native";
-import Gap from "../../components/Gap";
-import Line from "../../components/Line";
-import NavigationProp from "../../types/RouteTypes";
+import { Alert, Image, RefreshControl, SafeAreaView, ScrollView, StatusBar, Text, TouchableOpacity, View } from "react-native";
+import { Gap, Line, Modal } from '../../components';
+import { MainMenu, SliderMenu, Header } from "./Components";
 import styles from "./styles";
 
 const HomeScreen = () => {
@@ -16,9 +14,11 @@ const HomeScreen = () => {
             setRefreshing(false);
         }, 500);
     }, []);
+
     return (
         <SafeAreaView style={styles.mainContainer}  >
             <StatusBar backgroundColor={'white'} barStyle={'dark-content'} />
+            <Modal isOpen={isPromotionModalOpen} setIsOpen={setIsPromotionModalOpen} />
             <ScrollView refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />} >
                 <Header />
                 <Gap height={20} />
@@ -42,92 +42,8 @@ const HomeScreen = () => {
                 <Line />
                 <MorePlaces />
             </ScrollView >
-            <Modal
-                animationType="fade"
-                transparent={true}
-                visible={isPromotionModalOpen}
-                onRequestClose={() => {
-                    Alert.alert('Modal has been closed.');
-                    setIsPromotionModalOpen(!isPromotionModalOpen);
-                }}>
-                <View style={{
-                    backgroundColor: 'rgba(0,0,0,0.2)',
-                    height: '100%',
-                    width: '100%',
-                    flexDirection: 'column',
-                    justifyContent: 'center',
-                    alignItems: 'center'
-                }}>
-                    <View>
-                        <View style={{ backgroundColor: '#009A00', borderRadius: 40, marginTop: 40, width: Dimensions.get('screen').width - 40 }} >
-                            <View style={{ alignItems: 'center', marginTop: -60, gap: 20, marginBottom: 20 }}>
-                                <Image source={require('../../assets/icons/mid_month_sale.png')} style={{ height: 90, width: 200 }} />
-                                <Image source={require('../../assets/icons/special_event.png')} style={{ height: 30, width: 200 }} />
-                                <Text style={{ fontSize: 24, color: 'white', fontWeight: '800', textAlign: 'center' }}> {'Zikri, Get up to 99% OFF\n selected Hotels\n worldwide!'}</Text>
-                                <Text style={{ fontSize: 16, color: 'white', fontWeight: '300', textAlign: 'center' }}> {'Activate Special prices on selected hotels\nfor up to 24 hours'}</Text>
-                            </View>
-                            <TouchableOpacity style={{ height: 50, marginBottom: 30, marginHorizontal: 20, backgroundColor: 'white', borderRadius: 40, alignItems: 'center', justifyContent: 'center' }}>
-                                <Text style={{ fontWeight: '800' }}>ACTIVATE NOW</Text>
-                            </TouchableOpacity>
-
-                        </View>
-                        <TouchableOpacity activeOpacity={1} style={{ alignItems: 'center', justifyContent: 'center', position: 'absolute', right: 0, top: 0, backgroundColor: 'rgba(199, 196, 202, 0.9)', borderRadius: 20, height: 40, width: 40 }} onPress={() => { setIsPromotionModalOpen(false) }}>
-                            <Image source={require('../../assets/icons/x.png')} style={{ height: 14, width: 14 }} />
-                        </TouchableOpacity>
-                    </View>
-                </View>
-            </Modal>
         </SafeAreaView >
     )
-}
-
-const Header = () => {
-    return (
-        <View style={{ marginHorizontal: 12, marginTop: 5, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
-            <View style={{ flexDirection: 'row', alignItems: 'center', gap: 10 }}>
-                <Image source={require('../../assets/icons/agod_icon.png')} style={styles.leftImage} />
-                <TouchableOpacity>
-                    <Image source={require('../../assets/icons/member_banner.png')} style={styles.memberIcon} />
-                </TouchableOpacity>
-            </View>
-            <TouchableOpacity>
-                <View style={[styles.discountContainer, { flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }]}>
-                    <Image source={require('../../assets/icons/discount.png')} style={{ height: 15, width: 23 }} />
-                    <Text style={{ fontSize: 14, fontWeight: '600' }}>Rp 183K</Text>
-                </View>
-            </TouchableOpacity>
-        </View>
-    )
-}
-
-const MainMenu = () => {
-    const navigation = useNavigation<NavigationProp>();
-    return (<View style={{ marginHorizontal: 12, flexDirection: 'column', gap: 15 }} >
-        <View style={{ flexDirection: 'row', gap: 10 }}>
-            <TouchableOpacity onPress={() => navigation.navigate('HotelsScreen')} style={[styles.mainMenuChildContainer]} >
-                <Text style={{ marginBottom: 10, padding: 15, paddingVertical: 10, fontWeight: '600', fontSize: 16 }}>Hotels</Text>
-                <Image style={{ height: 55, width: 95, position: 'absolute', bottom: 0, right: 0 }} source={require('../../assets/icons/hotels.png')} />
-            </TouchableOpacity>
-            <TouchableOpacity onPress={() => navigation.navigate('FlightsScreen', { hasBackButton: true })} style={{ flex: 1, backgroundColor: "#F1DFFF", borderRadius: 25, height: 100, overflow: 'hidden' }} >
-                <Text style={{ marginBottom: 10, padding: 15, paddingVertical: 10, fontWeight: '600', fontSize: 16 }}>Flights</Text>
-                <Image style={{ height: 55, width: 95, position: 'absolute', bottom: 0, right: 0 }} source={require('../../assets/icons/flights.png')} />
-            </TouchableOpacity>
-        </View>
-        <View style={{ flexDirection: 'row', gap: 10 }}>
-            <TouchableOpacity onPress={() => navigation.navigate('FlightsAndHotelScreen', { hasBackButton: true })} style={{ flex: 1, backgroundColor: "#DFF7FF", borderRadius: 25, height: 100, overflow: 'hidden' }} >
-                <Text style={{ marginBottom: 10, padding: 15, paddingVertical: 10, fontWeight: '600', fontSize: 16 }}>{'Flights\n+Hotel'}</Text>
-                <Image style={{ height: 55, width: 99, position: 'absolute', bottom: 0, right: 0 }} source={require('../../assets/icons/flights_hotels.png')} />
-            </TouchableOpacity>
-            <TouchableOpacity onPress={() => navigation.navigate('ActivitiesScreen', { hasBackButton: true })} style={{ flex: 1, backgroundColor: "#FBF3D5", borderRadius: 25, height: 100, overflow: 'hidden' }} >
-                <Text style={{ marginBottom: 10, padding: 15, paddingVertical: 10, fontWeight: '600', fontSize: 16 }}>{'Activities'}</Text>
-                <Image style={{ height: 55, width: 95, position: 'absolute', bottom: 0, right: 0 }} source={require('../../assets/icons/activities.png')} />
-            </TouchableOpacity>
-            <TouchableOpacity onPress={() => navigation.navigate('HomesAndAptsScreen', { hasBackButton: true })} style={{ flex: 1, backgroundColor: "#EDFBD0", borderRadius: 25, height: 100, overflow: 'hidden' }} >
-                <Text style={{ marginBottom: 10, padding: 15, paddingVertical: 10, fontWeight: '600', fontSize: 16 }}>{'Homes\n& Apts'}</Text>
-                <Image style={{ height: 55, width: 95, position: 'absolute', bottom: 0, right: 0 }} source={require('../../assets/icons/hones_apts.png')} />
-            </TouchableOpacity>
-        </View>
-    </View>)
 }
 
 const DiscoverHotels = () => {
@@ -160,51 +76,6 @@ const DiscoverHotels = () => {
                     </View>
                 </TouchableOpacity>
             </ScrollView>
-        </View>
-    )
-}
-
-const SliderMenu = () => {
-    return (
-        <View style={{ paddingHorizontal: 12 }}>
-            <View style={{
-                backgroundColor: 'white',
-                shadowColor: "#000",
-                shadowOffset: { width: 0, height: 1, },
-                shadowOpacity: 0.25,
-                shadowRadius: 3.84,
-                elevation: 10,
-                paddingVertical: 12,
-                marginBottom: 5,
-                borderRadius: 15
-            }}>
-                <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} contentContainerStyle={{ paddingHorizontal: 10, gap: 10 }} >
-                    <TouchableOpacity style={{ flexDirection: 'column', width: 65, gap: 10, alignItems: 'center' }}>
-                        <Image style={{ height: 30, width: 30 }} source={require('../../assets/icons/airport_transfer.png')} />
-                        <Text style={{ fontSize: 10, textAlign: 'center', fontWeight: '600' }}>{'Airport\nTransfer'}</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={{ flexDirection: 'column', width: 65, gap: 10, alignItems: 'center' }}>
-                        <Image style={{ height: 30, width: 32 }} source={require('../../assets/icons/car_rentals.png')} />
-                        <Text style={{ fontSize: 10, textAlign: 'center', fontWeight: '600' }}>{'Car Rentals'}</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={{ flexDirection: 'column', width: 65, gap: 10, alignItems: 'center' }}>
-                        <Image style={{ height: 30, width: 24 }} source={require('../../assets/icons/esim.png')} />
-                        <Text style={{ fontSize: 10, textAlign: 'center', fontWeight: '600' }}>{'eSim'}</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={{ flexDirection: 'column', width: 65, gap: 10, alignItems: 'center' }}>
-                        <Image style={{ height: 30, width: 24 }} source={require('../../assets/icons/train_tickets.png')} />
-                        <Text style={{ fontSize: 10, textAlign: 'center', fontWeight: '600' }}>{'Train tickets'}</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={{ flexDirection: 'column', width: 65, gap: 10, alignItems: 'center' }}>
-                        <Image style={{ height: 30, width: 24 }} source={require('../../assets/icons/train_tickets.png')} />
-                        <Text style={{ fontSize: 10, textAlign: 'center', fontWeight: '600' }}>{'Bus Ticket'}</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={{ flexDirection: 'column', width: 65, gap: 10, alignItems: 'center' }}>
-                        <Image style={{ height: 30, width: 24 }} source={require('../../assets/icons/train_tickets.png')} />
-                        <Text style={{ fontSize: 10, textAlign: 'center', fontWeight: '600' }}>{'Another Feature'}</Text>
-                    </TouchableOpacity>
-                </ScrollView>
-            </View>
         </View>
     )
 }
@@ -408,6 +279,5 @@ const MorePlaces = () => {
         </View>
     )
 }
-
 
 export default HomeScreen;
