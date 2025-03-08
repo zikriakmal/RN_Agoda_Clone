@@ -1,19 +1,10 @@
-import { View, ScrollView, TouchableOpacity, Image, Text } from 'react-native';
+import { Image, ScrollView, Text, TouchableOpacity, View } from 'react-native';
+import styles from './styles';
 
 const SliderMenu = () => {
     return (
         <View style={{ paddingHorizontal: 12 }}>
-            <View style={{
-                backgroundColor: 'white',
-                shadowColor: "#000",
-                shadowOffset: { width: 0, height: 1, },
-                shadowOpacity: 0.25,
-                shadowRadius: 3.84,
-                elevation: 10,
-                paddingVertical: 12,
-                marginBottom: 5,
-                borderRadius: 15
-            }}>
+            <View style={styles.container}>
                 <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} contentContainerStyle={{ paddingHorizontal: 10, gap: 10 }} >
                     <TouchableOpacity style={{ flexDirection: 'column', width: 65, gap: 10, alignItems: 'center' }}>
                         <Image style={{ height: 30, width: 30 }} source={require('../../../../assets/icons/airport_transfer.png')} />

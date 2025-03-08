@@ -30,7 +30,6 @@ const Modal = ({ isOpen, setIsOpen }: { isOpen: boolean, setIsOpen: (isOpen: boo
                         <TouchableOpacity style={{ height: 50, marginBottom: 30, marginHorizontal: 20, backgroundColor: 'white', borderRadius: 40, alignItems: 'center', justifyContent: 'center' }}>
                             <Text style={{ fontWeight: '800' }}>ACTIVATE NOW</Text>
                         </TouchableOpacity>
-
                     </View>
                     <TouchableOpacity activeOpacity={1} style={{ alignItems: 'center', justifyContent: 'center', position: 'absolute', right: 0, top: 0, backgroundColor: 'rgba(199, 196, 202, 0.9)', borderRadius: 20, height: 40, width: 40 }} onPress={() => { setIsOpen(false) }}>
                         <Image source={require('../../assets/icons/x.png')} style={{ height: 14, width: 14 }} />
