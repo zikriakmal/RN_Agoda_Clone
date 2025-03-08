@@ -1,9 +1,9 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 
-import { NavigationContainer, useTheme } from '@react-navigation/native';
+import { NavigationContainer, useNavigationContainerRef, useTheme } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { Image, Text, TouchableOpacity, View } from 'react-native';
 import ActivitiesScreen from './src/screens/ActivitiesScreen';
 import FlightsAndHotelScreen from './src/screens/FlightsAndHotelScreen';
@@ -113,57 +113,59 @@ const MyTabs = () => {
   );
 }
 function App(): React.JSX.Element {
-  const [isLoaded, setIsLoaded] = useState<boolean>(false);
+  const navigationRef = useNavigationContainerRef();
   useEffect(() => {
     setTimeout(() => {
-      setIsLoaded(true)
-    }, 1000)
-  }, [])
+      if (navigationRef.isReady()) {
+        navigationRef.resetRoot({
+          index: 0,
+          routes: [{ name: 'Dashboard' }],
+        });
+      }
+    }, 1000);
+  }, []);
+
   return (
-    <NavigationContainer>
+    <NavigationContainer ref={navigationRef}>
       <Stack.Navigator>
-        {!isLoaded ?
-          <Stack.Screen
-            name="SplashScreen"
-            options={{ headerShown: false }}
-            component={SplashScreen} /> :
-          <>
-            <Stack.Screen name="Dashboard"
-              options={{ headerShown: false }}
-              component={MyTabs} />
-            <Stack.Screen
-              name="UnderconstructionScreen"
-              options={{
-                headerShown: false,
-                title: 'UnderconstructionScreen',
-                animationTypeForReplace: 'push',
-                animation: 'slide_from_bottom'
-              }}
-              component={UnderconstructionScreen} />
-            <Stack.Screen
-              name="HotelsScreen"
-              options={{ headerShown: false }}
-              component={HotelsScreen} />
-            <Stack.Screen
-              name="FlightsScreen"
-              options={{ headerShown: false }}
-              component={FlightsScreen}
-            />
-            <Stack.Screen
-              name="FlightsAndHotelScreen"
-              options={{ headerShown: false }}
-              component={FlightsAndHotelScreen}
-            />
-            <Stack.Screen
-              name="ActivitiesScreen"
-              options={{ headerShown: false }}
-              component={ActivitiesScreen} />
-            <Stack.Screen
-              name="HomesAndAptsScreen"
-              options={{ headerShown: false }}
-              component={HomesAndAptsScreen} />
-          </>
-        }
+        <Stack.Screen
+          name="SplashScreen"
+          options={{ headerShown: false }}
+          component={SplashScreen} />
+        <Stack.Screen name="Dashboard"
+          options={{ headerShown: false }}
+          component={MyTabs} />
+        <Stack.Screen
+          name="UnderconstructionScreen"
+          options={{
+            headerShown: false,
+            title: 'UnderconstructionScreen',
+            animationTypeForReplace: 'push',
+            animation: 'slide_from_bottom'
+          }}
+          component={UnderconstructionScreen} />
+        <Stack.Screen
+          name="HotelsScreen"
+          options={{ headerShown: false }}
+          component={HotelsScreen} />
+        <Stack.Screen
+          name="FlightsScreen"
+          options={{ headerShown: false }}
+          component={FlightsScreen}
+        />
+        <Stack.Screen
+          name="FlightsAndHotelScreen"
+          options={{ headerShown: false }}
+          component={FlightsAndHotelScreen}
+        />
+        <Stack.Screen
+          name="ActivitiesScreen"
+          options={{ headerShown: false }}
+          component={ActivitiesScreen} />
+        <Stack.Screen
+          name="HomesAndAptsScreen"
+          options={{ headerShown: false }}
+          component={HomesAndAptsScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

@@ -16,7 +16,7 @@ const HomeScreen = () => {
     }, []);
 
     return (
-        <SafeAreaView style={styles.mainContainer}  >
+        <SafeAreaView testID="dashboard-screen" style={styles.mainContainer}  >
             <StatusBar backgroundColor={'white'} barStyle={'dark-content'} />
             <Modal isOpen={isPromotionModalOpen} setIsOpen={setIsPromotionModalOpen} />
             <ScrollView refreshControl={
