@@ -1,3 +1,5 @@
+import { StyleSheet } from "react-native";
+
 // Types
 interface spacingType {
     borderRadius: number;
@@ -92,4 +94,18 @@ const themes: themesType = {
     },
 };
 
-export { spacing, typeSizes, typeVariants, themes };
+const globalStyles = StyleSheet.create({
+    shadow: {
+        backgroundColor: 'white',
+        shadowColor: "#000",
+        shadowOffset: { width: 0, height: 1 },
+        shadowOpacity: 0.25,
+        shadowRadius: 3.84,
+        elevation: 15,
+        paddingVertical: 12,
+        marginBottom: 5,
+        borderRadius: 15
+    }
+});
+
+export { spacing, typeSizes, typeVariants, themes, globalStyles };

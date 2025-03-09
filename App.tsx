@@ -13,6 +13,7 @@ import HomeScreen from './src/screens/HomeScreen';
 import HotelsScreen from './src/screens/HotelsScreen';
 import SplashScreen from './src/screens/SplashScreen';
 import UnderconstructionScreen from './src/screens/UnderconstructionScreen';
+import SelectDestination from './src/screens/HotelsScreen/SelectDestination';
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -166,6 +167,10 @@ function App(): React.JSX.Element {
           name="HomesAndAptsScreen"
           options={{ headerShown: false }}
           component={HomesAndAptsScreen} />
+        <Stack.Screen
+          name="SelectDestination"
+          options={{ headerShown: false }}
+          component={SelectDestination} />
       </Stack.Navigator>
     </NavigationContainer>
   );

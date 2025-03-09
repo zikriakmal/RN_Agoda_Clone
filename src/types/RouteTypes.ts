@@ -3,6 +3,7 @@ import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 type RootStackParamList = {
     Dashboard: undefined;
     SplashScreen: undefined;
+    SelectDestination: undefined;
     UnderconstructionScreen: { hasBackButton?: boolean };
     HotelsScreen: undefined;
     FlightsScreen: { hasBackButton?: boolean };
