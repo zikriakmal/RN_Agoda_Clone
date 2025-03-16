@@ -6,11 +6,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { globalStyles } from '../../constants/themes';
 import { NavigationProp } from '../../types/RouteTypes';
 import styles from './styles';
-
-
-interface Props {
-    horizontalView?: boolean;
-}
+import { GlobalHeader } from '../../components';
 
 const RANGE = 8;
 const INITIAL_DATE = new Date().toDateString();
@@ -21,8 +17,9 @@ const getFormattedMonth = (dateString: string) => {
     return date.toLocaleString('default', { month: 'long', year: 'numeric' });
 };
 
-const DatePickerScreen = (props: Props) => {
-    const { horizontalView } = props;
+const DatePickerScreen = () => {
+
+    const navigation = useNavigation<NavigationProp>();
     const [startDate, setStartDate] = useState(INITIAL_DATE);
     const [endDate, setEndDate] = useState(INITIAL_END_DATE)
     const [counter, setCounter] = useState(0);
@@ -80,28 +77,37 @@ const DatePickerScreen = (props: Props) => {
         }
     };
 
-    const topStartDate = new Date(startDate).toLocaleDateString('en-US', {
-        weekday: 'short',
-        month: 'short',
-        day: '2-digit'
-    });
+    const topStartDate =
+        new Date(startDate).toLocaleDateString('en-US', {
+            weekday: 'short',
+            month: 'short',
+            day: '2-digit'
+        });
 
-    const topEndDate = endDate === '' ? topStartDate : new Date(endDate).toLocaleDateString('en-US', {
-        weekday: 'short',
-        month: 'short',
-        day: '2-digit'
-    }); const navigation = useNavigation<NavigationProp>();
+    const topEndDate = endDate === '' ? topStartDate :
+        new Date(endDate).toLocaleDateString('en-US', {
+            weekday: 'short',
+            month: 'short',
+            day: '2-digit'
+        });
+
 
     return (
         <SafeAreaView style={{ backgroundColor: 'white' }}>
             <StatusBar backgroundColor={'white'} />
+
             <SafeAreaView edges={['top']} style={{ position: 'absolute', width: '100%', zIndex: 998, backgroundColor: 'white' }}>
-                <View style={{ ...globalStyles.bottomShadow, borderRadius: 0, paddingHorizontal: 30 }}>
-                    <TouchableOpacity onPress={() => navigation.goBack()} style={{ position: 'absolute', width: '100%', top: 14, left: 20, zIndex: 999 }}>
-                        <Image source={require('../../assets/icons/x.png')} style={{ height: 20, width: 20 }} />
-                    </TouchableOpacity>
-                    <Text style={{ alignSelf: 'center', fontWeight: '500', fontSize: 20 }}>Edit</Text>
-                    <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', paddingVertical: 20, gap: 20 }}>
+
+                <View style={{ ...globalStyles.bottomShadow, borderRadius: 0, paddingHorizontal: 0 }}>
+                    <GlobalHeader withShadow={false} isCloseButton={true} title='Edit' />
+                    <View style={{
+                        paddingHorizontal: 30,
+                        flexDirection: 'row',
+                        justifyContent: 'space-between',
+                        alignItems: 'center',
+                        paddingVertical: 20,
+                        gap: 20
+                    }}>
                         <View style={{ flex: 1 }}>
                             <Text>{'Check-in'}</Text>
                             <Text style={{ fontSize: 16, fontWeight: '600' }}>{topStartDate}</Text>
@@ -112,14 +118,14 @@ const DatePickerScreen = (props: Props) => {
                             <Text style={{ fontSize: 16, fontWeight: '600' }}>{topEndDate}</Text>
                         </View>
                     </View>
-                    <View style={{ flexDirection: 'row', justifyContent: 'space-between', paddingTop: 20 }}>
+                    <View style={{ flexDirection: 'row', justifyContent: 'space-between', paddingTop: 20, paddingHorizontal: 30 }}>
                         {['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map((day) => (
                             <Text key={day}>{day}</Text>
                         ))}
                     </View>
                 </View>
                 <View style={styles.header}>
-                    <Text style={[styles.month, { fontWeight: '800', fontSize: 18, marginTop: 20 }]}>{`${currentMonth}`}</Text>
+                    <Text style={[styles.month, { fontWeight: '800', fontSize: 18, marginTop: 20, marginLeft:-5 }]}>{`${currentMonth}`}</Text>
                 </View>
             </SafeAreaView>
             <View style={{ marginTop: 160, marginBottom: 50 }}>
@@ -132,11 +138,10 @@ const DatePickerScreen = (props: Props) => {
                     onDayPress={onDayPress}
                     markingType={'period'}
                     markedDates={generateMarkedDates(startDate, endDate)}
-                    renderHeader={!horizontalView ? renderCustomHeader : undefined}
-                    calendarHeight={!horizontalView ? 320 : undefined}
-                    theme={!horizontalView ? theme : undefined}
-                    horizontal={horizontalView}
-                    pagingEnabled={horizontalView}
+                    renderHeader={renderCustomHeader}
+                    calendarHeight={320}
+                    horizontal={false}
+                    pagingEnabled={false}
                 />
             </View>
             <View style={{ position: 'absolute', bottom: 0, width: '100%' }}>
@@ -145,33 +150,9 @@ const DatePickerScreen = (props: Props) => {
                 </TouchableOpacity>
             </View>
         </SafeAreaView>
-
     );
 };
 
-const theme = {
-    stylesheet: {
-        calendar: {
-            header: {
-                dayHeader: {
-                    fontWeight: '600',
-                    color: '#48BFE3',
-                    ...globalStyles.shadow
-                }
-            }
-        }
-    },
-    'stylesheet.day.basic': {
-        today: {
-            borderColor: '#48BFE3',
-            borderWidth: 0.8
-        },
-        todayText: {
-            color: '#5390D9',
-            fontWeight: '800'
-        }
-    }
-};
 
 function renderCustomHeader(date: any) {
     const header = date.toString('MMMM yyyy');
