@@ -30,13 +30,18 @@ const DatePickerScreen = (props: Props) => {
     const [currentMonth, setCurrentMonth] = useState(getFormattedMonth(INITIAL_DATE));
 
     const onDayPress = useCallback((day: DateData) => {
+        console.log(day.timestamp < new Date(startDate).getTime());
         if (counter === 1) {
-            setEndDate(day.dateString);
-            setCounter(0);
+            if (day.timestamp < new Date(startDate).getTime()) {
+                setStartDate(day.dateString);
+                setCounter(1);
+            } else {
+                setEndDate(day.dateString);
+                setCounter(0);
+            }
         }
         else {
             setStartDate(day.dateString);
-            console.log(day.dateString);
             setEndDate('');
             setCounter(counter + 1)
         }
@@ -60,7 +65,7 @@ const DatePickerScreen = (props: Props) => {
             }
         };
         marked[endDate] = {
-            endingDay: true, color: "#DBE7FD", textColor: 'white', customContainerStyle: {
+            endingDay: true, color: endDate === startDate ? 'transparent' : "#DBE7FD", textColor: 'white', customContainerStyle: {
                 borderRadius: 20,
                 backgroundColor: "#488AF8"
             }
@@ -75,11 +80,17 @@ const DatePickerScreen = (props: Props) => {
         }
     };
 
-    const topStartDate = new Date(startDate).toDateString();
-    const topEndDate = endDate === '' ? topStartDate : new Date(endDate).toDateString();
+    const topStartDate = new Date(startDate).toLocaleDateString('en-US', {
+        weekday: 'short',
+        month: 'short',
+        day: '2-digit'
+    });
 
-    const navigation = useNavigation<NavigationProp>();
-
+    const topEndDate = endDate === '' ? topStartDate : new Date(endDate).toLocaleDateString('en-US', {
+        weekday: 'short',
+        month: 'short',
+        day: '2-digit'
+    }); const navigation = useNavigation<NavigationProp>();
 
     return (
         <SafeAreaView style={{ backgroundColor: 'white' }}>
@@ -110,7 +121,7 @@ const DatePickerScreen = (props: Props) => {
                     <Text style={[styles.month, { fontWeight: '800', fontSize: 18, marginTop: 20 }]}>{`${currentMonth}`}</Text>
                 </View>
             </SafeAreaView>
-            <View style={{ marginTop: 160 }}>
+            <View style={{ marginTop: 160, marginBottom: 50 }}>
                 <CalendarList
                     hideDayNames={true}
                     current={INITIAL_DATE}
@@ -126,6 +137,11 @@ const DatePickerScreen = (props: Props) => {
                     horizontal={horizontalView}
                     pagingEnabled={horizontalView}
                 />
+            </View>
+            <View style={{ position: 'absolute', bottom: 0, width: '100%' }}>
+                <TouchableOpacity onPress={() => navigation.goBack()} style={{ alignItems: 'center', justifyContent: 'center', backgroundColor: '#2067DA', borderRadius: 25, height: 50, margin: 20,marginBottom:30 }}>
+                    <Text style={{ color: 'white', fontWeight: '500', fontSize: 16 }}>{`OK (${Object.keys(generateMarkedDates(startDate, endDate)).length - 1} nights)`}</Text>
+                </TouchableOpacity>
             </View>
         </SafeAreaView>
 

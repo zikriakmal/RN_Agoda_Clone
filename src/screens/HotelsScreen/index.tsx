@@ -88,8 +88,6 @@ const HotelsScreen = () => {
                                     <Text style={{ color: 'white', fontWeight: '500', fontSize: 16 }}>Search</Text>
                                 </TouchableOpacity>
                             </View>
-
-
                         </View>)
                         :
                         <View style={{ height: 240, alignItems: 'center', justifyContent: 'center' }}><Text style={{ fontWeight: '700' }}>UnderConstruction</Text></View>
