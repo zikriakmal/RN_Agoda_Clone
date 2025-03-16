@@ -1,4 +1,5 @@
 import { StyleSheet } from "react-native";
+import colors from "../../constants/colors";
 
 const styles = StyleSheet.create({
     header: {
@@ -8,14 +9,28 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         marginTop: 20,
         marginBottom: 0,
-        paddingBottom:5,
+        paddingBottom: 5,
+    },
+    buttonSubmit: {
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: colors.blueMark,
+        borderRadius: 25,
+        height: 50,
+        margin: 20,
+        marginBottom: 30
+    },
+    buttonContainer: {
+        position: 'absolute',
+        bottom: 0,
+        width: '100%'
     },
     month: {
         marginLeft: 5
     },
     year: {
         marginRight: 5
-    }
+    },
 });
 
 export default styles;

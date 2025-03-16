@@ -3,10 +3,11 @@ import React, { useCallback, useState } from 'react';
 import { Image, StatusBar, Text, TextStyle, TouchableOpacity, View } from 'react-native';
 import { CalendarList, DateData } from 'react-native-calendars';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { GlobalHeader } from '../../components';
+import { days } from '../../constants/constants';
 import { globalStyles } from '../../constants/themes';
 import { NavigationProp } from '../../types/RouteTypes';
 import styles from './styles';
-import { GlobalHeader } from '../../components';
 
 const RANGE = 8;
 const INITIAL_DATE = new Date().toDateString();
@@ -18,16 +19,14 @@ const getFormattedMonth = (dateString: string) => {
 };
 
 const DatePickerScreen = () => {
-
     const navigation = useNavigation<NavigationProp>();
+
     const [startDate, setStartDate] = useState(INITIAL_DATE);
     const [endDate, setEndDate] = useState(INITIAL_END_DATE)
     const [counter, setCounter] = useState(0);
-
     const [currentMonth, setCurrentMonth] = useState(getFormattedMonth(INITIAL_DATE));
 
     const onDayPress = useCallback((day: DateData) => {
-        console.log(day.timestamp < new Date(startDate).getTime());
         if (counter === 1) {
             if (day.timestamp < new Date(startDate).getTime()) {
                 setStartDate(day.dateString);
@@ -51,7 +50,6 @@ const DatePickerScreen = () => {
         while (currentDate <= new Date(endDate)) {
             const formattedDate = currentDate.toISOString().split('T')[0];
             marked[formattedDate] = { color: '#DBE7FD', textColor: 'black' };
-
             currentDate.setDate(currentDate.getDate() + 1);
         }
 
@@ -91,13 +89,10 @@ const DatePickerScreen = () => {
             day: '2-digit'
         });
 
-
     return (
         <SafeAreaView style={{ backgroundColor: 'white' }}>
             <StatusBar backgroundColor={'white'} />
-
             <SafeAreaView edges={['top']} style={{ position: 'absolute', width: '100%', zIndex: 998, backgroundColor: 'white' }}>
-
                 <View style={{ ...globalStyles.bottomShadow, borderRadius: 0, paddingHorizontal: 0 }}>
                     <GlobalHeader withShadow={false} isCloseButton={true} title='Edit' />
                     <View style={{
@@ -119,13 +114,11 @@ const DatePickerScreen = () => {
                         </View>
                     </View>
                     <View style={{ flexDirection: 'row', justifyContent: 'space-between', paddingTop: 20, paddingHorizontal: 30 }}>
-                        {['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map((day) => (
-                            <Text key={day}>{day}</Text>
-                        ))}
+                        {days.map((day) => (<Text key={day}>{day}</Text>))}
                     </View>
                 </View>
                 <View style={styles.header}>
-                    <Text style={[styles.month, { fontWeight: '800', fontSize: 18, marginTop: 20, marginLeft:-5 }]}>{`${currentMonth}`}</Text>
+                    <Text style={[styles.month, { fontWeight: '800', fontSize: 18, marginTop: 20, marginLeft: -5 }]}>{`${currentMonth}`}</Text>
                 </View>
             </SafeAreaView>
             <View style={{ marginTop: 160, marginBottom: 50 }}>
@@ -144,8 +137,8 @@ const DatePickerScreen = () => {
                     pagingEnabled={false}
                 />
             </View>
-            <View style={{ position: 'absolute', bottom: 0, width: '100%' }}>
-                <TouchableOpacity onPress={() => navigation.goBack()} style={{ alignItems: 'center', justifyContent: 'center', backgroundColor: '#2067DA', borderRadius: 25, height: 50, margin: 20, marginBottom: 30 }}>
+            <View style={styles.buttonContainer}>
+                <TouchableOpacity onPress={() => navigation.goBack()} style={styles.buttonSubmit}>
                     <Text style={{ color: 'white', fontWeight: '500', fontSize: 16 }}>{`OK (${Object.keys(generateMarkedDates(startDate, endDate)).length - 1} nights)`}</Text>
                 </TouchableOpacity>
             </View>

@@ -116,7 +116,7 @@ const HotelsScreen = () => {
                                     <Text style={{ fontSize: 16, fontWeight: '700' }} numberOfLines={1}>Up to Rp500,000 Off white</Text>
                                     <Text style={{ fontWeight: '400', color: 'grey', fontSize: 12 }}>{'Min. spend Rp450,000 |\nExpires in 3 days'}</Text>
                                 </View>
-                                <Text style={{ textAlign: 'right', fontWeight: '800', color: '#2067DA' }}>Collect</Text>
+                                <Text style={{ textAlign: 'right', fontWeight: '800', color: colors.blueMark }}>Collect</Text>
                             </View>
                         </TouchableOpacity>
                         <TouchableOpacity onPress={() => Alert.alert('Underconstruction')} style={{
