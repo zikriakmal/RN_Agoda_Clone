@@ -10,6 +10,7 @@ type RootStackParamList = {
     FlightsAndHotelScreen: { hasBackButton?: boolean };
     ActivitiesScreen: { hasBackButton?: boolean };
     HomesAndAptsScreen: { hasBackButton?: boolean };
+    DatePickerScreen: { hasBackButton?: boolean };
 };
 
 type NavigationProp = NativeStackNavigationProp<RootStackParamList, 'HotelsScreen'>;

@@ -105,7 +105,18 @@ const globalStyles = StyleSheet.create({
         paddingVertical: 12,
         marginBottom: 5,
         borderRadius: 15
+    },
+    bottomShadow: {
+        backgroundColor: 'white',
+        shadowColor: "#000",
+        shadowOffset: { width: 0, height: 5 },
+        shadowOpacity: 0.15,
+        shadowRadius: 3.84,
+        elevation: 15,
+        paddingVertical: 12,
+        marginBottom: 0,
+        borderRadius: 15
     }
 });
 
-export { spacing, typeSizes, typeVariants, themes, globalStyles };
+export { globalStyles, spacing, themes, typeSizes, typeVariants };

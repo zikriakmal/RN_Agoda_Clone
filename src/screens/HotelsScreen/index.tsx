@@ -1,11 +1,9 @@
 import { useNavigation } from "@react-navigation/native";
-import { Alert, Dimensions, Image, ScrollView, StatusBar, StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
-import styles from "./styles";
-import { globalStyles as globalStyles } from '../../constants/themes';
-import colors from "../../constants/colors";
-import { Gap, Line } from "../../components";
 import { useState } from "react";
+import { Alert, Dimensions, Image, ScrollView, StatusBar, Text, TouchableOpacity, View } from "react-native";
+import { Gap, Line } from "../../components";
+import colors from "../../constants/colors";
+import { globalStyles } from '../../constants/themes';
 import { NavigationProp } from "../../types/RouteTypes";
 
 type TabActive = 'overnight' | 'day_use';
@@ -24,7 +22,7 @@ const HotelsScreen = () => {
                     <TouchableOpacity onPress={() => navigation.goBack()} style={[globalStyles.shadow, { borderRadius: 20, height: 40, width: 40, justifyContent: 'center', alignItems: 'center' }]}>
                         <Image source={require('../../assets/icons/chevron_left.png')} style={{ height: 18, width: 10 }} />
                     </TouchableOpacity>
-                    <TouchableOpacity onPress={()=> Alert.alert('Underconstruction')} style={[globalStyles.shadow, { borderRadius: 20, height: 40, gap: 10, padding: 20, justifyContent: 'center', alignItems: 'center', flexDirection: 'row' }]}>
+                    <TouchableOpacity onPress={() => Alert.alert('Underconstruction')} style={[globalStyles.shadow, { borderRadius: 20, height: 40, gap: 10, padding: 20, justifyContent: 'center', alignItems: 'center', flexDirection: 'row' }]}>
                         <Image source={require('../../assets/icons/currency.png')} style={{ height: 20, width: 20 }} />
                         <Text style={{ fontWeight: '600', fontSize: 14 }}>IDR</Text>
                     </TouchableOpacity>
@@ -53,7 +51,7 @@ const HotelsScreen = () => {
                                 <Image source={require('../../assets/icons/location.png')} style={{ height: 18, width: 18 }} />
                             </TouchableOpacity>
                             <View style={{ flexDirection: 'row', gap: 10 }}>
-                                <TouchableOpacity onPress={() => Alert.alert('Underconstruction')} style={{ backgroundColor: '#EDF0F9', height: 50, borderRadius: 25, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', paddingHorizontal: 15, flex: 1 }}>
+                                <TouchableOpacity onPress={() => navigation.navigate('DatePickerScreen', { hasBackButton: true })} style={{ backgroundColor: '#EDF0F9', height: 50, borderRadius: 25, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', paddingHorizontal: 15, flex: 1 }}>
                                     <Image source={require('../../assets/icons/calendar.png')} style={{ height: 20, width: 19 }} />
                                     <Text numberOfLines={1} style={{ fontWeight: '400', flex: 1, fontSize: 14, paddingHorizontal: 15 }}>{'Thu, 27 Feb'}</Text>
                                 </TouchableOpacity>
@@ -123,7 +121,7 @@ const HotelsScreen = () => {
                                 <Text style={{ textAlign: 'right', fontWeight: '800', color: '#2067DA' }}>Collect</Text>
                             </View>
                         </TouchableOpacity>
-                        <TouchableOpacity onPress={()=> Alert.alert('Underconstruction')} style={{
+                        <TouchableOpacity onPress={() => Alert.alert('Underconstruction')} style={{
                             paddingHorizontal: 10,
                             paddingVertical: 10,
                             borderWidth: 0.5,
