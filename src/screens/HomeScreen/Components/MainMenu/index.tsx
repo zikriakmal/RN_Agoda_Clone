@@ -16,7 +16,7 @@ const MainMenu = () => {
                     onPress={() => navigation.navigate('HotelsScreen')}
                 />
                 <MainMenuChild
-                    name="Hotels"
+                    name="Flights"
                     icon={require('../../../../assets/icons/flights.png')}
                     bgColor={colors.flights}
                     onPress={() => navigation.navigate('FlightsScreen', { hasBackButton: false })}

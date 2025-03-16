@@ -5,6 +5,7 @@ import { Alert, Image, StatusBar, TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { NavigationProp } from "../../types/RouteTypes";
 import { globalStyles } from "../../constants/themes";
+import { GlobalHeader } from "../../components";
 
 const INITIAL_GUEST_DETAILS = {
     room: 0,
@@ -20,12 +21,7 @@ const GuestDetailsScreen = () => {
     return (
         <SafeAreaView style={{ backgroundColor: 'white', flex: 1 }}>
             <StatusBar backgroundColor={'white'} />
-            <View style={{ ...globalStyles.bottomShadow, flexDirection: 'row', borderRadius: 0, paddingHorizontal: 30 }}>
-                <TouchableOpacity onPress={() => navigation.goBack()} >
-                    <Image source={require('../../assets/icons/x.png')} style={{ height: 20, width: 20 }} />
-                </TouchableOpacity>
-                <Text style={{ flex: 1, textAlign: 'center', fontWeight: '500', fontSize: 20 }}>Guest details</Text>
-            </View>
+            <GlobalHeader isCloseButton={true} title={"Guest Details"} />
             <View style={{ flex: 1 }}>
                 <CategoryDetail
                     setGuestDetails={setGuestDetails}
