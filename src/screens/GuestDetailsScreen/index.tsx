@@ -1,11 +1,10 @@
 import { Text } from "@react-navigation/elements";
 import { useNavigation } from "@react-navigation/native";
-import { useEffect, useState } from "react";
-import { Alert, Image, StatusBar, TouchableOpacity, View } from "react-native";
+import { useState } from "react";
+import { StatusBar, TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { NavigationProp } from "../../types/RouteTypes";
-import { globalStyles } from "../../constants/themes";
 import { GlobalHeader } from "../../components";
+import { NavigationProp } from "../../types/RouteTypes";
 
 const INITIAL_GUEST_DETAILS = {
     room: 0,

@@ -20,5 +20,4 @@ const UnderconstructionScreen = (): React.JSX.Element => {
     )
 }
 
-
 export default UnderconstructionScreen;

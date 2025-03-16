@@ -145,12 +145,6 @@ const HotelsScreen = () => {
                     </ScrollView>
                 </View>
             </ScrollView>
-
-
-            {/* <Text>{'Hotel Screen'}</Text> */}
-            {/* <TouchableOpacity onPress={() => navigation.goBack()} >
-                <Text style={{ fontWeight: '800' }}>Go Back</Text>
-            </TouchableOpacity> */}
         </View>
     )
 }

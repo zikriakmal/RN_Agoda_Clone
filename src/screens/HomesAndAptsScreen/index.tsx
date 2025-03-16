@@ -1,5 +1,5 @@
-import { Text, View, SafeAreaView } from "react-native"
-import GlobalHeader from "../../components/GlobalHeader";
+import { SafeAreaView, Text, View } from "react-native";
+import { GlobalHeader } from "../../components";
 
 const HomesAndAptsScreen = () => {
     return (

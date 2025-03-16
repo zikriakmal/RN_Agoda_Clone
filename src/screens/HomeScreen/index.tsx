@@ -1,5 +1,5 @@
 import { useCallback, useState } from "react";
-import { RefreshControl, SafeAreaView, ScrollView, StatusBar, Text } from "react-native";
+import { RefreshControl, SafeAreaView, ScrollView, StatusBar } from "react-native";
 import { Gap, Line, Modal } from '../../components';
 import { DiscoverHotels, GrabCoupon, Header, MainMenu, MorePlaces, NewUserWelcomePack, PlanTrip, Promotions, SliderMenu, SpecialDeals, VipStatus } from "./Components";
 import styles from "./styles";
@@ -59,9 +59,5 @@ const HomeScreen = () => {
         </SafeAreaView >
     )
 }
-
-
-
-
 
 export default HomeScreen;

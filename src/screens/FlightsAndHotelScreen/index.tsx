@@ -1,5 +1,5 @@
 import { Text, View, SafeAreaView } from "react-native"
-import GlobalHeader from "../../components/GlobalHeader";
+import { GlobalHeader } from "../../components";
 
 const FlightsAndHotelScreen = () => {
     return (

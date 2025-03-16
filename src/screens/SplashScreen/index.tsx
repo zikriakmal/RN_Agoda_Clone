@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Text, View } from "react-native"
+import { Image, View } from "react-native";
 import styles from "./styles";
 
 const SplashScreen = () => {
@@ -11,8 +11,5 @@ const SplashScreen = () => {
         </View>
     )
 }
-
-
-
 
 export default SplashScreen;
