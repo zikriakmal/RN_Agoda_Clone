@@ -1,6 +1,6 @@
 import { useNavigation } from '@react-navigation/native';
 import React, { useCallback, useState } from 'react';
-import { Image, Text, TextStyle, TouchableOpacity, View } from 'react-native';
+import { Image, StatusBar, Text, TextStyle, TouchableOpacity, View } from 'react-native';
 import { CalendarList, DateData } from 'react-native-calendars';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { globalStyles } from '../../constants/themes';
@@ -94,6 +94,7 @@ const DatePickerScreen = (props: Props) => {
 
     return (
         <SafeAreaView style={{ backgroundColor: 'white' }}>
+            <StatusBar backgroundColor={'white'} />
             <SafeAreaView edges={['top']} style={{ position: 'absolute', width: '100%', zIndex: 998, backgroundColor: 'white' }}>
                 <View style={{ ...globalStyles.bottomShadow, borderRadius: 0, paddingHorizontal: 30 }}>
                     <TouchableOpacity onPress={() => navigation.goBack()} style={{ position: 'absolute', width: '100%', top: 14, left: 20, zIndex: 999 }}>
@@ -139,7 +140,7 @@ const DatePickerScreen = (props: Props) => {
                 />
             </View>
             <View style={{ position: 'absolute', bottom: 0, width: '100%' }}>
-                <TouchableOpacity onPress={() => navigation.goBack()} style={{ alignItems: 'center', justifyContent: 'center', backgroundColor: '#2067DA', borderRadius: 25, height: 50, margin: 20,marginBottom:30 }}>
+                <TouchableOpacity onPress={() => navigation.goBack()} style={{ alignItems: 'center', justifyContent: 'center', backgroundColor: '#2067DA', borderRadius: 25, height: 50, margin: 20, marginBottom: 30 }}>
                     <Text style={{ color: 'white', fontWeight: '500', fontSize: 16 }}>{`OK (${Object.keys(generateMarkedDates(startDate, endDate)).length - 1} nights)`}</Text>
                 </TouchableOpacity>
             </View>
