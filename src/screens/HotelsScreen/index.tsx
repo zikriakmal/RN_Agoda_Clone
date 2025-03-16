@@ -55,14 +55,14 @@ const HotelsScreen = () => {
                                     <Image source={require('../../assets/icons/calendar.png')} style={{ height: 20, width: 19 }} />
                                     <Text numberOfLines={1} style={{ fontWeight: '400', flex: 1, fontSize: 14, paddingHorizontal: 15 }}>{'Thu, 27 Feb'}</Text>
                                 </TouchableOpacity>
-                                <TouchableOpacity onPress={() => Alert.alert('Underconstruction')} style={{ backgroundColor: '#EDF0F9', height: 50, borderRadius: 25, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', paddingHorizontal: 15, flex: 1 }}>
+                                <TouchableOpacity onPress={() => navigation.navigate('DatePickerScreen', { hasBackButton: true })} style={{ backgroundColor: '#EDF0F9', height: 50, borderRadius: 25, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', paddingHorizontal: 15, flex: 1 }}>
                                     <Image source={require('../../assets/icons/calendar.png')} style={{ height: 20, width: 19 }} />
                                     <Text numberOfLines={1} style={{ fontWeight: '400', fontSize: 14, flex: 1, paddingHorizontal: 15 }}>{'Fri, 28 Feb'}</Text>
                                 </TouchableOpacity>
                             </View>
-                            <TouchableOpacity onPress={() => Alert.alert('Underconstruction')} style={{ backgroundColor: '#EDF0F9', height: 50, borderRadius: 25, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', paddingHorizontal: 15 }}>
+                            <TouchableOpacity onPress={() => navigation.navigate('GuestDetailsScreen', { hasBackButton: true })} style={{ backgroundColor: '#EDF0F9', height: 50, borderRadius: 25, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', paddingHorizontal: 15 }}>
                                 <Image source={require('../../assets/icons/person.png')} style={{ height: 20, width: 16 }} />
-                                <Text style={{ fontWeight: '400', flex: 1, paddingHorizontal: 20 }}>{'1 room 2 adults 0 children'}</Text>
+                                <Text style={{ fontWeight: '400', flex: 1, paddingHorizontal: 20 }}>{'1 room 1 adults 0 children'}</Text>
                             </TouchableOpacity>
                             <View style={{ flexDirection: 'row', gap: 10, alignItems: 'center' }}>
                                 <View style={{ flexDirection: 'row', gap: 15, alignItems: 'center', flex: 1 }}>

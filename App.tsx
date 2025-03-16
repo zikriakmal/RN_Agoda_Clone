@@ -15,6 +15,7 @@ import SplashScreen from './src/screens/SplashScreen';
 import UnderconstructionScreen from './src/screens/UnderconstructionScreen';
 import SelectDestination from './src/screens/HotelsScreen/SelectDestination';
 import DatePickerScreen from './src/screens/DatePickerScreen';
+import GuestDetailsScreen from './src/screens/GuestDetailsScreen';
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -174,8 +175,12 @@ function App(): React.JSX.Element {
           component={SelectDestination} />
         <Stack.Screen
           name="DatePickerScreen"
-          options={{ headerShown: false, animation:'slide_from_bottom' }}
+          options={{ headerShown: false, animation: 'slide_from_bottom' }}
           component={DatePickerScreen} />
+        <Stack.Screen
+          name="GuestDetailsScreen"
+          options={{ headerShown: false, animation: 'slide_from_bottom' }}
+          component={GuestDetailsScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
