@@ -1,7 +1,7 @@
 import { Image, View } from "react-native";
 import styles from "./styles";
 
-const SplashScreen = () => {
+const SplashScreen = (): React.JSX.Element => {
     return (
         <View testID="splash-screen" style={styles.container}>
             <Image

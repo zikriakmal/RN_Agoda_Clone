@@ -4,7 +4,7 @@ import { Gap, Line, Modal } from '../../components';
 import { DiscoverHotels, GrabCoupon, Header, MainMenu, MorePlaces, NewUserWelcomePack, PlanTrip, Promotions, SliderMenu, SpecialDeals, VipStatus } from "./Components";
 import styles from "./styles";
 
-const HomeScreen = () => {
+const HomeScreen = (): React.JSX.Element => {
     const [refreshing, setRefreshing] = useState(false);
     const [isPromotionModalOpen, setIsPromotionModalOpen] = useState(true);
 

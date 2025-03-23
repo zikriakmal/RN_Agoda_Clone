@@ -1,17 +1,14 @@
 import { Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { GlobalHeader } from "../../components";
+import styles from "./styles";
 
 
 const FlightsScreen = () => {
     return (
-        <SafeAreaView style={{ flex: 1, backgroundColor: 'white' }}>
+        <SafeAreaView style={styles.container}>
             <GlobalHeader title="Flights" />
-            <View style={{
-                flex: 1,
-                alignItems: 'center',
-                justifyContent: 'center',
-            }}>
+            <View style={styles.innerContainer}>
                 <Text>Flights Screen</Text>
             </View>
         </SafeAreaView>

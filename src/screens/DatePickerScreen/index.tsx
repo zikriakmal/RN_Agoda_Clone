@@ -6,21 +6,24 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { GlobalHeader } from '../../components';
 import { days } from '../../constants/constants';
 import { globalStyles } from '../../constants/themes';
+import { getFormattedMonth } from '../../helpers';
 import { NavigationProp } from '../../types/RouteTypes';
+
 import styles from './styles';
 
 const RANGE = 8;
 const INITIAL_DATE = new Date().toDateString();
 const INITIAL_END_DATE = new Date().toDateString();
 
-const getFormattedMonth = (dateString: string) => {
-    const date = new Date(dateString);
-    return date.toLocaleString('default', { month: 'long', year: 'numeric' });
-};
+const DATE_FORMAT: Intl.DateTimeFormatOptions = {
+    weekday: 'short',
+    month: 'short',
+    day: '2-digit'
+}
 
 const DatePickerScreen = () => {
-    const navigation = useNavigation<NavigationProp>();
 
+    const navigation = useNavigation<NavigationProp>();
     const [startDate, setStartDate] = useState(INITIAL_DATE);
     const [endDate, setEndDate] = useState(INITIAL_END_DATE)
     const [counter, setCounter] = useState(0);
@@ -75,24 +78,13 @@ const DatePickerScreen = () => {
         }
     };
 
-    const topStartDate =
-        new Date(startDate).toLocaleDateString('en-US', {
-            weekday: 'short',
-            month: 'short',
-            day: '2-digit'
-        });
-
-    const topEndDate = endDate === '' ? topStartDate :
-        new Date(endDate).toLocaleDateString('en-US', {
-            weekday: 'short',
-            month: 'short',
-            day: '2-digit'
-        });
+    const topStartDate = new Date(startDate).toLocaleDateString('en-US', DATE_FORMAT);
+    const topEndDate = endDate === '' ? topStartDate : new Date(endDate).toLocaleDateString('en-US', DATE_FORMAT);
 
     return (
         <SafeAreaView style={{ backgroundColor: 'white' }}>
             <StatusBar backgroundColor={'white'} />
-            <SafeAreaView edges={['top']} style={{ position: 'absolute', width: '100%', zIndex: 998, backgroundColor: 'white' }}>
+            <SafeAreaView edges={['top']} style={styles.headerContainer}>
                 <View style={{ ...globalStyles.bottomShadow, borderRadius: 0, paddingHorizontal: 0 }}>
                     <GlobalHeader withShadow={false} isCloseButton={true} title='Edit' />
                     <View style={{
@@ -117,7 +109,7 @@ const DatePickerScreen = () => {
                         {days.map((day) => (<Text key={day}>{day}</Text>))}
                     </View>
                 </View>
-                <View style={styles.header}>
+                <View style={styles.stickyMonthHeader}>
                     <Text style={[styles.month, { fontWeight: '800', fontSize: 18, marginTop: 20, marginLeft: -5 }]}>{`${currentMonth}`}</Text>
                 </View>
             </SafeAreaView>
@@ -139,15 +131,14 @@ const DatePickerScreen = () => {
             </View>
             <View style={styles.buttonContainer}>
                 <TouchableOpacity onPress={() => navigation.goBack()} style={styles.buttonSubmit}>
-                    <Text style={{ color: 'white', fontWeight: '500', fontSize: 16 }}>{`OK (${Object.keys(generateMarkedDates(startDate, endDate)).length - 1} nights)`}</Text>
+                    <Text style={styles.buttonText}>{`OK (${Object.keys(generateMarkedDates(startDate, endDate)).length - 1} nights)`}</Text>
                 </TouchableOpacity>
             </View>
         </SafeAreaView>
     );
 };
 
-
-function renderCustomHeader(date: any) {
+const renderCustomHeader = (date: any) => {
     const header = date.toString('MMMM yyyy');
     const [month, year] = header.split(' ');
     const textStyle: TextStyle = {
@@ -160,7 +151,7 @@ function renderCustomHeader(date: any) {
     };
 
     return (
-        <View style={styles.header}>
+        <View style={styles.headerContainer}>
             <Text style={[styles.month, textStyle]}>{`${month}`}</Text>
             <Text style={[styles.year, textStyle]}>{year}</Text>
         </View>

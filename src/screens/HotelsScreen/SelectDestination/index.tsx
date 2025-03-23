@@ -4,7 +4,7 @@ import { Line } from "../../../components";
 import { useNavigation } from "@react-navigation/native";
 import { NavigationProp } from "../../../types/RouteTypes";
 
-const SelectDestination = () => {
+const SelectDestination = (): React.JSX.Element => {
     const navigation = useNavigation<NavigationProp>()
     {
 

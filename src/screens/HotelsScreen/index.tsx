@@ -8,7 +8,7 @@ import { NavigationProp } from "../../types/RouteTypes";
 
 type TabActive = 'overnight' | 'day_use';
 
-const HotelsScreen = () => {
+const HotelsScreen = (): React.JSX.Element => {
     const navigation = useNavigation<NavigationProp>();
     const [tabActive, setTabActive] = useState<TabActive>('overnight');
     const [isLimitedTime, setIsLimitedTime] = useState<boolean>(false);

@@ -1,9 +1,10 @@
 import { SafeAreaView, Text, View } from "react-native";
 import GlobalHeader from "../../components/GlobalHeader";
+import styles from "./styles";
 
 const ActivitiesScreen = () => {
     return (
-        <SafeAreaView style={{ flex: 1, backgroundColor: 'white' }}>
+        <SafeAreaView style={styles.container}>
             <GlobalHeader title="Activities" />
             <View style={{
                 flex: 1,
