@@ -16,6 +16,7 @@ import UnderconstructionScreen from './src/screens/UnderconstructionScreen';
 import SelectDestination from './src/screens/HotelsScreen/SelectDestination';
 import DatePickerScreen from './src/screens/DatePickerScreen';
 import GuestDetailsScreen from './src/screens/GuestDetailsScreen';
+import MyTripsScreen from './src/screens/MyTripsScreen';
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -108,7 +109,7 @@ const MyTabs = () => {
   return (
     <Tab.Navigator screenOptions={{ headerShown: false, }} tabBar={(props) => <MyTabBar {...props} />} >
       <Tab.Screen name="Home" options={{ title: 'Home' }} component={HomeScreen} />
-      <Tab.Screen name="MyTrips" options={{ title: 'My Trips' }} component={UnderconstructionScreen} />
+      <Tab.Screen name="MyTrips" options={{ title: 'My Trips' }} component={MyTripsScreen} />
       <Tab.Screen name="Deals" options={{ title: 'Deals' }} component={UnderconstructionScreen} />
       <Tab.Screen name="Cart" options={{ title: 'Cart' }} component={UnderconstructionScreen} />
       <Tab.Screen name="More" options={{ title: 'More' }} component={UnderconstructionScreen} />

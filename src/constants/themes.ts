@@ -116,6 +116,16 @@ const globalStyles = StyleSheet.create({
         paddingVertical: 12,
         marginBottom: 0,
         borderRadius: 15
+    },
+    normalShadow:{
+        backgroundColor: 'white',
+        shadowColor: "#000",
+        shadowOffset: { width: 0, height: 8 },
+        shadowOpacity: 0.50,
+        borderBottomWidth:0.35,
+        borderBottomColor:'lightgrey',
+        shadowRadius: 5.85,
+        elevation: 15,
     }
 });
 
